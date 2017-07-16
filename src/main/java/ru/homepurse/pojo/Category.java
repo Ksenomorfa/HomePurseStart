@@ -1,11 +1,14 @@
 package ru.homepurse.pojo;
 
 public class Category {
-    private final Long id;
+
+    private final Long id = 1L;
     private String name;
 
+    public Category() {
+    }
+
     public Category(String name) {
-        this.id = null;
         this.name = name;
     }
 
@@ -17,6 +20,9 @@ public class Category {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
     @Override
     public int hashCode() {
         return id.hashCode();
@@ -31,4 +37,13 @@ public class Category {
         return category != null &&
                 this.getId().equals(category.getId());
     }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
 }

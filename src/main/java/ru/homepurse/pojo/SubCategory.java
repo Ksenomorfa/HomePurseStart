@@ -1,14 +1,20 @@
 package ru.homepurse.pojo;
 
 public class SubCategory {
-    private final Long id;
+    private final Long id = 1L;
     private String name;
     private Category category;
 
     public SubCategory(String name, Category category) {
-        this.id = null;
+        this(category);
         this.name = name;
+    }
+
+    public SubCategory(Category category) {
         this.category = category;
+    }
+
+    public SubCategory() {
     }
 
     public Long getId() {
@@ -17,6 +23,18 @@ public class SubCategory {
 
     public String getName() {
         return name;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override
@@ -32,5 +50,14 @@ public class SubCategory {
         }
         return subCategory != null &&
                 this.getId().equals(subCategory.getId());
+    }
+
+    @Override
+    public String toString() {
+        return "SubCategory{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", category=" + category.getName() +
+                '}';
     }
 }

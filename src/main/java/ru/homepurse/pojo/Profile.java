@@ -4,27 +4,36 @@ import java.util.Currency;
 import java.util.Locale;
 
 public class Profile {
-    private final Long id;
+    private final Long id = 1L;
     private String name;
     private String country;
     private Currency defaultCurrency;
+    private boolean includeSubCategories;
+
+    @Override
+    public String toString() {
+        return "Profile{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", country='" + country + '\'' +
+                ", defaultCurrency=" + defaultCurrency +
+                ", includeSubCategories=" + includeSubCategories +
+                '}';
+    }
 
     public Profile(String name, String country, Currency defaultCurrency) {
-        this.country = country;
+        this(name,country);
         this.defaultCurrency = defaultCurrency;
-        this.id = null;
-        this.name = name;
     }
 
     public Profile(String name, String country) {
+        this();
         this.country = country;
-        this.defaultCurrency = Currency.getInstance(Locale.getDefault());
-        this.id = null;
         this.name = name;
     }
 
     public Profile() {
-        this.id = null;
+        this.defaultCurrency = Currency.getInstance(Locale.getDefault());
     }
 
     public Long getId() {
@@ -33,6 +42,22 @@ public class Profile {
 
     public String getName() {
         return name;
+    }
+
+    public Currency getDefaultCurrency() {
+        return defaultCurrency;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     @Override
@@ -50,17 +75,13 @@ public class Profile {
                 this.getId().equals(profile.getId());
     }
 
-    public Currency getDefaultCurrency() {
-        return defaultCurrency;
+
+    public boolean isIncludeSubCategories() {
+        return includeSubCategories;
     }
 
-    public String getCountry() {
-        return country;
+    public void setIncludeSubCategories(boolean includeSubCategories) {
+        this.includeSubCategories = includeSubCategories;
     }
 
-    @Override
-    public String toString() {
-        return "Profile id: " + id + ", name: " + name + ", country: " + country +
-                ", default currency " + defaultCurrency;
-    }
 }

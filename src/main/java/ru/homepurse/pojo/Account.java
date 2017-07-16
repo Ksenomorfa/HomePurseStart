@@ -3,26 +3,24 @@ package ru.homepurse.pojo;
 import java.util.Currency;
 
 public class Account {
-    private final Long id;
+    private final Long id = 1L;
     private String name;
     private Currency accountCurrency;
     private int remnant;
     private Profile profile;
 
-    public Account(String name, Profile profile) {
-        this.id = null;
-        this.name = name;
-        this.accountCurrency = profile.getDefaultCurrency();
+    public Account() {
+    }
+
+    public Account(Profile profile) {
         this.profile = profile;
+        this.accountCurrency = profile.getDefaultCurrency();
     }
 
     public Account(String name, Profile profile, Currency currency) {
-        this(name, profile);
+        this(profile);
+        this.name = name;
         this.accountCurrency = currency;
-    }
-
-    public Account() {
-        this.id = null;
     }
 
     public Long getId() {
@@ -37,6 +35,31 @@ public class Account {
         return accountCurrency;
     }
 
+
+    public Currency getAccountCurrency() {
+        return accountCurrency;
+    }
+
+    public void setAccountCurrency(Currency accountCurrency) {
+        this.accountCurrency = accountCurrency;
+    }
+
+    public Profile getProfile() {
+
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.accountCurrency =currency;
+    }
     @Override
     public int hashCode() {
         return id.hashCode();
@@ -60,9 +83,15 @@ public class Account {
         this.remnant = remnant;
     }
 
+
     @Override
     public String toString() {
-        return "Profile: " + profile.getName() + ". Account id:" + id + ", name: " + name
-                + ", remnant: " + remnant + " " + accountCurrency;
+        return "Account{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", accountCurrency=" + accountCurrency +
+                ", remnant=" + remnant +
+                ", profile=" + profile.getName() +
+                '}';
     }
 }

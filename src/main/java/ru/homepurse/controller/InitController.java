@@ -13,12 +13,11 @@ public class InitController {
         model.addAttribute("greeting", "Welcome to HomePurse");
 
         return "index";
-
     }
     @RequestMapping(value="/", method = RequestMethod.GET)
     public String root(Model model) {
-        return "redirect:/index";
 
+        return "redirect:/index";
     }
 
     @RequestMapping("/accounts")
@@ -26,16 +25,13 @@ public class InitController {
         model.addAttribute("accounts", "Your accounts:");
 
         return "accounts";
-
     }
-
 
     @RequestMapping("/flows")
     public String flow(Model model) {
         model.addAttribute("flows", "Your cash flows:");
 
         return "flows";
-
     }
 
     @RequestMapping("/reports")
@@ -43,6 +39,5 @@ public class InitController {
         model.addAttribute("reports", "Your reports:");
 
         return "reports";
-
     }
 }
