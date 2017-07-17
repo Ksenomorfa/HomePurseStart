@@ -11,16 +11,23 @@ public class InitController {
     @RequestMapping("/index")
     public String hello(Model model) {
         model.addAttribute("greeting", "Welcome to HomePurse");
-
         return "index";
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String root() {
-
-        return "redirect:/index";
+        return "redirect:/login";
     }
 
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(Model model) {
+        return "login";
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String register(Model model) {
+        return "register";
+    }
 
     @RequestMapping("/settings")
     public String setting(Model model) {

@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceView;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import ru.homepurse.data.AccountsRepository;
 import ru.homepurse.pojo.Account;
 import ru.homepurse.pojo.Profile;
@@ -27,7 +28,20 @@ public class InitControllerTest {
     @Test
     public void testController() {
         InitController initController = new InitController();
-        assertEquals("redirect:/index", initController.root());
+        assertEquals("redirect:/login", initController.root());
+    }
+
+    @Test
+    public void testControllerIndex() throws Exception {
+
+        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+        viewResolver.setPrefix("/WEB-INF/pages/");
+        viewResolver.setSuffix(".jsp");
+        InitController initController = new InitController();
+
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(initController)
+                .setViewResolvers(viewResolver).build();
+        mockMvc.perform(get("/index")).andExpect(view().name("index"));
     }
 
     @Test
@@ -50,7 +64,7 @@ public class InitControllerTest {
     private List<Account> createAccountList(int count) {
         List<Account> accounts = new ArrayList<>();
         for (int i=0;i<count;i++) {
-            accounts.add(new Account("№" + i,new Profile("Polina","Russia")));
+            accounts.add(new Account("№" + i,new Profile("Russia")));
         }
         return accounts;
     }

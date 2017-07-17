@@ -10,12 +10,11 @@ import java.util.List;
 @Repository
 public class AccountsRepositoryImpl implements AccountsRepository {
 
-
     @Override
     public List<Account> findAccounts(long max, int count) {
         List<Account> list = new ArrayList<>();
-        list.add(new Account(new Profile("Polina","Russia")));
-
+        Profile profile = new Profile();
+        list.add(new Account(profile));
         return list;
     }
 }

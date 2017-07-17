@@ -19,6 +19,7 @@ public class AccountsController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String account(Model model) {
+        model.addAttribute("greeting", "Your accounts:");
         model.addAttribute(accountsRepository.findAccounts(Long.MAX_VALUE,5));
         return "accounts";
     }

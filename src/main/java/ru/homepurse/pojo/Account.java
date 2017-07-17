@@ -93,7 +93,7 @@ public class Account {
                 ", name='" + name + '\'' +
                 ", accountCurrency=" + accountCurrency +
                 ", remnant=" + remnant +
-                ", profile=" + profile.getName() +
+                ", profile=" + profile.getId() +
                 '}';
     }
 }
