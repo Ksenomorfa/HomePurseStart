@@ -22,12 +22,8 @@ public class CashFlow {
         EXPENSE;
     }
 
-    public CashFlow() {
-        this.timeStamp = LocalDate.now();
-    }
-
     public CashFlow(Account account, Category category, SubCategory subCategory) {
-        this();
+        this.timeStamp = LocalDate.now();
         this.account = account;
         this.cashFlowCurrency = account.getCurrency();
         this.category = category;

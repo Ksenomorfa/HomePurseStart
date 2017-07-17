@@ -9,17 +9,19 @@ public class Account {
     private int remnant;
     private Profile profile;
 
-    public Account() {
-    }
-
     public Account(Profile profile) {
         this.profile = profile;
         this.accountCurrency = profile.getDefaultCurrency();
     }
 
-    public Account(String name, Profile profile, Currency currency) {
+    public Account(String name, Profile profile) {
         this(profile);
         this.name = name;
+        this.profile = profile;
+
+    }
+    public Account(String name, Profile profile, Currency currency) {
+        this(name,profile);
         this.accountCurrency = currency;
     }
 

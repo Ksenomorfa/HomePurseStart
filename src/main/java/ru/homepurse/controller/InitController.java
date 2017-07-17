@@ -14,17 +14,19 @@ public class InitController {
 
         return "index";
     }
-    @RequestMapping(value="/", method = RequestMethod.GET)
-    public String root(Model model) {
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String root() {
 
         return "redirect:/index";
     }
 
-    @RequestMapping("/accounts")
-    public String account(Model model) {
-        model.addAttribute("accounts", "Your accounts:");
 
-        return "accounts";
+    @RequestMapping("/settings")
+    public String setting(Model model) {
+        model.addAttribute("settings", "Your settings:");
+
+        return "settings";
     }
 
     @RequestMapping("/flows")

@@ -5,9 +5,6 @@ public class Category {
     private final Long id = 1L;
     private String name;
 
-    public Category() {
-    }
-
     public Category(String name) {
         this.name = name;
     }

@@ -10,30 +10,15 @@ public class Profile {
     private Currency defaultCurrency;
     private boolean includeSubCategories;
 
-    @Override
-    public String toString() {
-        return "Profile{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", country='" + country + '\'' +
-                ", defaultCurrency=" + defaultCurrency +
-                ", includeSubCategories=" + includeSubCategories +
-                '}';
-    }
-
     public Profile(String name, String country, Currency defaultCurrency) {
-        this(name,country);
+        this(name, country);
         this.defaultCurrency = defaultCurrency;
     }
 
     public Profile(String name, String country) {
-        this();
+        this.defaultCurrency = Currency.getInstance(Locale.getDefault());
         this.country = country;
         this.name = name;
-    }
-
-    public Profile() {
-        this.defaultCurrency = Currency.getInstance(Locale.getDefault());
     }
 
     public Long getId() {
@@ -60,6 +45,14 @@ public class Profile {
         this.country = country;
     }
 
+    public boolean isIncludeSubCategories() {
+        return includeSubCategories;
+    }
+
+    public void setIncludeSubCategories(boolean includeSubCategories) {
+        this.includeSubCategories = includeSubCategories;
+    }
+
     @Override
     public int hashCode() {
         return id.hashCode();
@@ -75,13 +68,15 @@ public class Profile {
                 this.getId().equals(profile.getId());
     }
 
-
-    public boolean isIncludeSubCategories() {
-        return includeSubCategories;
-    }
-
-    public void setIncludeSubCategories(boolean includeSubCategories) {
-        this.includeSubCategories = includeSubCategories;
+    @Override
+    public String toString() {
+        return "Profile{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", country='" + country + '\'' +
+                ", defaultCurrency=" + defaultCurrency +
+                ", includeSubCategories=" + includeSubCategories +
+                '}';
     }
 
 }
