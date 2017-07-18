@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+
+    <bean id="client" class="ru.homepurse.loggers.Client">
+        <constructor-arg index="0" value="1"/>
+        <constructor-arg index="1" value="John"/>
+    </bean>
+
+    <bean id="app" class="ru.homepurse.loggers.App">
+        <constructor-arg ref="client"/>
+        <constructor-arg ref="cacheFileEventlogger"/>
+    </bean>
+
+    <bean id="event" class="ru.homepurse.loggers.Event" scope="prototype">
+        <constructor-arg>
+            <bean class="java.util.Date"/>
+        </constructor-arg>
+        <constructor-arg ref="dateFormat"/>
+    </bean>
+
+    <bean id="dateFormat" class="java.text.DateFormat"
+          factory-method="getDateTimeInstance"/>
+
+</beans>

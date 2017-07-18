@@ -1,7 +1,5 @@
 package ru.homepurse.pojo;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.time.LocalDate;
 import java.util.Currency;
 
@@ -12,7 +10,7 @@ public class CashFlow {
     private Category category = new Category("Default");
     private SubCategory subCategory = new SubCategory("Default", category);
     private CashFlowType cashFlowType;
-    private Account account;
+    private Purse purse;
     private Currency cashFlowCurrency;
     private int sum;
     private LocalDate timeStamp;
@@ -22,18 +20,18 @@ public class CashFlow {
         EXPENSE;
     }
 
-    public CashFlow(Account account, Category category, SubCategory subCategory) {
+    public CashFlow(Purse purse, Category category, SubCategory subCategory) {
         this.timeStamp = LocalDate.now();
-        this.account = account;
-        this.cashFlowCurrency = account.getCurrency();
+        this.purse = purse;
+        this.cashFlowCurrency = purse.getCurrency();
         this.category = category;
         this.subCategory = subCategory;
         initCashFlow();
     }
 
     public CashFlow(String name, CashFlowType cashFlowType,
-                    int sum, Account account, Category category, SubCategory subCategory) {
-        this(account, category, subCategory);
+                    int sum, Purse purse, Category category, SubCategory subCategory) {
+        this(purse, category, subCategory);
         this.cashFlowType = cashFlowType;
         this.sum = sum;
         this.name = name;
@@ -68,8 +66,8 @@ public class CashFlow {
         return subCategory;
     }
 
-    public Account getAccount() {
-        return account;
+    public Purse getPurse() {
+        return purse;
     }
 
     public LocalDate getTimeStamp() {
@@ -88,14 +86,14 @@ public class CashFlow {
         this.cashFlowType = cashFlowType;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setPurse(Purse purse) {
+        this.purse = purse;
     }
 
     public void initCashFlow() {
         if (cashFlowType == CashFlowType.INCOME) {
-            account.setRemnant(account.getRemnant() + sum);
-        } else account.setRemnant(account.getRemnant() - sum);
+            purse.setRemnant(purse.getRemnant() + sum);
+        } else purse.setRemnant(purse.getRemnant() - sum);
     }
 
     @Override
@@ -121,7 +119,7 @@ public class CashFlow {
                 ", category=" + category.getName() +
                 ", subCategory=" + subCategory.getName() +
                 ", cashFlowType=" + cashFlowType.name() +
-                ", account=" + account.getName() +
+                ", purse=" + purse.getName() +
                 ", cashFlowCurrency=" + cashFlowCurrency +
                 ", sum=" + sum +
                 ", timeStamp=" + timeStamp +

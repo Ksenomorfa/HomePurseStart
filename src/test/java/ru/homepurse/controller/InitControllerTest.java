@@ -1,27 +1,24 @@
 package ru.homepurse.controller;
 
 import org.junit.Test;
-import org.springframework.test.web.servlet.MockMvcBuilder;
+import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceView;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import ru.homepurse.data.AccountsRepository;
-import ru.homepurse.pojo.Account;
+import ru.homepurse.data.PursesRepository;
 import ru.homepurse.pojo.Profile;
-
-import static org.hamcrest.CoreMatchers.hasItems;
-import static org.mockito.Mockito.*;
-import org.springframework.test.web.servlet.MockMvc;
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
+import ru.homepurse.pojo.Purse;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.hasItems;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 public class InitControllerTest {
 
@@ -46,26 +43,26 @@ public class InitControllerTest {
 
     @Test
     public void testAccounts() throws Exception {
-        List<Account> accounts =createAccountList(5);
-        AccountsRepository accountsRepository = mock(AccountsRepository.class);
-        when(accountsRepository.findAccounts(Long.MAX_VALUE,5))
-                .thenReturn(accounts);
+        List<Purse> purses =createAccountList(5);
+        PursesRepository pursesRepository = mock(PursesRepository.class);
+        when(pursesRepository.findPurses(Long.MAX_VALUE,5))
+                .thenReturn(purses);
 
-        AccountsController accountsController = new AccountsController(accountsRepository);
-        MockMvc mockMVC = MockMvcBuilders.standaloneSetup(accountsController)
+        PursesController pursesController = new PursesController(pursesRepository);
+        MockMvc mockMVC = MockMvcBuilders.standaloneSetup(pursesController)
                 .setSingleView(new InternalResourceView("/WEB-INF/pages/account.jsp"))
                 .build();
 
-        mockMVC.perform(get("/accounts")).andExpect(view().name("accounts"))
+        mockMVC.perform(get("/purses")).andExpect(view().name("purses"))
                 .andExpect(model().attributeExists("accountList"))
-                .andExpect(model().attribute("accountList",hasItems(accounts.toArray())));
+                .andExpect(model().attribute("accountList",hasItems(purses.toArray())));
     }
 
-    private List<Account> createAccountList(int count) {
-        List<Account> accounts = new ArrayList<>();
+    private List<Purse> createAccountList(int count) {
+        List<Purse> purses = new ArrayList<>();
         for (int i=0;i<count;i++) {
-            accounts.add(new Account("№" + i,new Profile("Russia")));
+            purses.add(new Purse("№" + i,new Profile("Russia")));
         }
-        return accounts;
+        return purses;
     }
 }

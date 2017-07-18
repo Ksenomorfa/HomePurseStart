@@ -2,27 +2,28 @@ package ru.homepurse.pojo;
 
 import java.util.Currency;
 
-public class Account {
+public class Purse {
     private final Long id = 1L;
     private String name;
-    private Currency accountCurrency;
+    private Currency purseCurrency;
     private int remnant;
     private Profile profile;
 
-    public Account(Profile profile) {
+    public Purse(Profile profile) {
         this.profile = profile;
-        this.accountCurrency = profile.getDefaultCurrency();
+        this.purseCurrency = profile.getDefaultCurrency();
     }
 
-    public Account(String name, Profile profile) {
+    public Purse(String name, Profile profile) {
         this(profile);
         this.name = name;
         this.profile = profile;
 
     }
-    public Account(String name, Profile profile, Currency currency) {
-        this(name,profile);
-        this.accountCurrency = currency;
+
+    public Purse(String name, Profile profile, Currency currency) {
+        this(name, profile);
+        this.purseCurrency = currency;
     }
 
     public Long getId() {
@@ -34,16 +35,16 @@ public class Account {
     }
 
     public Currency getCurrency() {
-        return accountCurrency;
+        return purseCurrency;
     }
 
 
-    public Currency getAccountCurrency() {
-        return accountCurrency;
+    public Currency getPurseCurrency() {
+        return purseCurrency;
     }
 
-    public void setAccountCurrency(Currency accountCurrency) {
-        this.accountCurrency = accountCurrency;
+    public void setPurseCurrency(Currency purseCurrency) {
+        this.purseCurrency = purseCurrency;
     }
 
     public Profile getProfile() {
@@ -60,8 +61,9 @@ public class Account {
     }
 
     public void setCurrency(Currency currency) {
-        this.accountCurrency =currency;
+        this.purseCurrency = currency;
     }
+
     @Override
     public int hashCode() {
         return id.hashCode();
@@ -69,12 +71,12 @@ public class Account {
 
     @Override
     public boolean equals(Object obj) {
-        Account account = null;
-        if (obj instanceof Account) {
-            account = (Account) obj;
+        Purse purse = null;
+        if (obj instanceof Purse) {
+            purse = (Purse) obj;
         }
-        return account != null &&
-                this.getId().equals(account.getId());
+        return purse != null &&
+                this.getId().equals(purse.getId());
     }
 
     public int getRemnant() {
@@ -88,10 +90,10 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account{" +
+        return "Purse{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", accountCurrency=" + accountCurrency +
+                ", purseCurrency=" + purseCurrency +
                 ", remnant=" + remnant +
                 ", profile=" + profile.getId() +
                 '}';

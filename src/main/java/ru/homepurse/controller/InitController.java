@@ -32,21 +32,18 @@ public class InitController {
     @RequestMapping("/settings")
     public String setting(Model model) {
         model.addAttribute("settings", "Your settings:");
-
         return "settings";
     }
 
     @RequestMapping("/flows")
     public String flow(Model model) {
         model.addAttribute("flows", "Your cash flows:");
-
         return "flows";
     }
 
     @RequestMapping("/reports")
     public String report(Model model) {
         model.addAttribute("reports", "Your reports:");
-
         return "reports";
     }
 }
